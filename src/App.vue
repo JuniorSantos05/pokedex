@@ -1,21 +1,16 @@
 <template>
-  <header class="header">
-    <div class="container_img_header">
-      <img
-        :src="require('./assets/Pokedex.png')"
-        alt="imagem pokedex"
-        class="img_header"
-      />
-    </div>
-    <h1 class="h1_title">Pokedex</h1>
-  </header>
+  <HeaderComponent />
 
   <section class="section">
-    <label for="pokemonInput">
-      Quem é esse Pokémon?
-      <input type="text" id="pokemonInput" v-model="pokemonID" />
-    </label>
-    <button class="searchButton" @click="searchPokemon">Pesquisar</button>
+    <div class="search_container">
+      <h2 class="input_title">Quem é esse Pokémon?</h2>
+      <div class="input_container">
+        <label for="pokemonInput">
+          <input type="text" id="pokemonInput" v-model="pokemonID" />
+        </label>
+        <button class="searchButton" @click="searchPokemon">Pesquisar</button>
+      </div>
+    </div>
   </section>
 
   <main class="main" v-if="Object.entries(pokemonData).length > 0">
@@ -46,6 +41,7 @@
 
 <script>
 import { baseUrl } from "./Api";
+import HeaderComponent from "./components/HeaderComponent.vue";
 export default {
   name: "App",
   data() {
@@ -54,6 +50,7 @@ export default {
       pokemonID: "",
     };
   },
+  components: { HeaderComponent },
   methods: {
     async searchPokemon() {
       try {
@@ -70,4 +67,52 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body {
+  font-family: "Varela Round", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.input_title {
+  margin: 50px 0 8px 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+input {
+  padding: 8px 0 8px;
+  max-width: 100%;
+  min-width: 0;
+  width: 50vw;
+
+  border-radius: 5px;
+}
+
+.searchButton {
+  width: 100px;
+  border-radius: 5px;
+  font-weight: 400;
+  color: #f8f8f8;
+  background-color: #170353;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.searchButton:hover {
+  background-color: #512dbc;
+}
+
+.search_container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  align-items: center;
+}
+
+.input_container {
+  display: flex;
+  gap: 10px;
+}
+</style>
