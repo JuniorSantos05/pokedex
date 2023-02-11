@@ -74,10 +74,10 @@ export default {
   methods: {
     async searchPokemon() {
       try {
+        this.pokemonID = this.pokemonID.toLowerCase();
         const whoIsThisPokemon = await fetch(`${baseUrl}/${this.pokemonID}`);
         const pokemon = await whoIsThisPokemon.json();
         this.pokemonData = pokemon;
-        console.log(pokemon);
         return pokemon;
       } catch (error) {
         alert("Pokemon was not found");
