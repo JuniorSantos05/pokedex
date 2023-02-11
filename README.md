@@ -1,7 +1,7 @@
 # Pokedex
 
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
-![Badge Tecnologias](https://img.shields.io/badge/Tecnologias-%20HTML%20|%20Vue.JS%20|%20CSS%20-informational)
 
 ## Descrição do Projeto
 
@@ -14,10 +14,7 @@ Aplicação simples, onde o usuário busca as informaçóes de um determinado Po
     <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D" /> 
 </div><br>
 
-## Status do Projeto
 
-> :construction: Projeto em desenvolvimento. :construction:
-> 
 
 ## 🛠️ Link do projeto
 
