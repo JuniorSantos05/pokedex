@@ -40,6 +40,7 @@ export default {
 }
 
 .container_img_header {
+  width: 100%;
   height: 80%;
   display: flex;
   justify-content: center;
@@ -51,8 +52,20 @@ export default {
 
 .h1_title {
   display: contents;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 700;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .h1_title {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .h1_title {
+    font-size: 30px;
+  }
 }
 
 .container_text {

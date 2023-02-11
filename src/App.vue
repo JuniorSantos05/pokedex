@@ -95,10 +95,35 @@ body {
   box-sizing: border-box;
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .searchTitle {
   margin: 50px 0 8px 0;
-  font-size: 2rem;
+  font-size: 22px;
   font-weight: 700;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .searchTitle {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .searchTitle {
+    font-size: 17px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .searchTitle {
+    font-size: 16px;
+  }
 }
 
 .searchInput {
@@ -144,6 +169,12 @@ body {
   align-items: center;
   margin-top: 30px;
   gap: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+  .pokemonCard {
+    flex-direction: column;
+  }
 }
 
 .boxImg {
@@ -194,6 +225,8 @@ body {
 
 .pokemonTypes {
   width: 35%;
+  min-width: 360px;
+  max-width: 400px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
