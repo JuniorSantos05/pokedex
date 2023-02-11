@@ -2,11 +2,17 @@
   <HeaderComponent />
 
   <section class="section">
-    <div class="search_container">
-      <h2 class="input_title">Quem é esse Pokémon?</h2>
-      <div class="input_container">
+    <div class="searchContainer">
+      <h2 class="searchTitle">Digite o ID ou nome do Pokemon</h2>
+      <div class="inputContainer">
         <label for="pokemonInput">
-          <input type="text" id="pokemonInput" v-model="pokemonID" />
+          <input
+            class="searchInput"
+            type="text"
+            id="pokemonInput"
+            v-model="pokemonID"
+            @keyup.enter="searchPokemon"
+          />
         </label>
         <button class="searchButton" @click="searchPokemon">Pesquisar</button>
       </div>
@@ -16,25 +22,38 @@
   <main class="main" v-if="Object.entries(pokemonData).length > 0">
     <section class="pokemonCard">
       <div class="nameImage">
-        <h1 class="pokemonName">{{ pokemonData.name }}</h1>
-        <img :src="pokemonData.sprites.front_default" :alt="pokemonData.name" />
+        <h1 class="pokemonName">
+          {{
+            pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1)
+          }}
+        </h1>
+
+        <div class="boxImg">
+          <img
+            :src="pokemonData.sprites.front_default"
+            :alt="pokemonData.name"
+          />
+        </div>
+        <button class="toogleBtn" @click="showDetails = !showDetails">+</button>
       </div>
-      <ul class="type">
-        <h2>Type:</h2>
-        <li
-          v-for="(type, key) in pokemonData.types"
-          :key="key"
-          :class="type.type.name"
-        >
-          <span>{{ type.type.name }}</span>
-        </li>
-      </ul>
-      <ul class="stats">
-        <h2>Stats:</h2>
-        <li v-for="(stat, key) in pokemonData.stats" :key="key">
-          <span>{{ stat.stat.name }} => {{ stat.base_stat }}</span>
-        </li>
-      </ul>
+      <div class="pokemonTypes">
+        <ul class="type" v-if="showDetails">
+          <h2>Type:</h2>
+          <li
+            v-for="(type, key) in pokemonData.types"
+            :key="key"
+            :class="type.type.name"
+          >
+            <span>{{ type.type.name }}</span>
+          </li>
+        </ul>
+        <ul class="stats" v-if="showDetails">
+          <h2>Stats:</h2>
+          <li v-for="(stat, key) in pokemonData.stats" :key="key">
+            <span>{{ stat.stat.name }} => {{ stat.base_stat }}</span>
+          </li>
+        </ul>
+      </div>
     </section>
   </main>
 </template>
@@ -48,6 +67,7 @@ export default {
     return {
       pokemonData: {},
       pokemonID: "",
+      showDetails: false,
     };
   },
   components: { HeaderComponent },
@@ -75,13 +95,13 @@ body {
   box-sizing: border-box;
 }
 
-.input_title {
+.searchTitle {
   margin: 50px 0 8px 0;
   font-size: 2rem;
   font-weight: 700;
 }
 
-input {
+.searchInput {
   padding: 8px 0 8px;
   max-width: 100%;
   min-width: 0;
@@ -104,15 +124,84 @@ input {
   background-color: #512dbc;
 }
 
-.search_container {
+.searchContainer {
   display: flex;
   flex-direction: column;
   max-width: 100%;
   align-items: center;
 }
 
-.input_container {
+.inputContainer {
   display: flex;
   gap: 10px;
+}
+
+.pokemonCard {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30px;
+  gap: 40px;
+}
+
+.boxImg {
+  background-color: #170353;
+  border-radius: 50%;
+  display: flex;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxImg img {
+  width: 100%;
+}
+
+.nameImage {
+  display: flex;
+  position: relative;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  gap: 20px;
+  border-radius: 6px;
+  box-shadow: 1px 1px #170353, 2px 2px #170353, 3px 3px #170353;
+  transition: 0.3s;
+}
+
+.toogleBtn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  font-size: 20px;
+  font-weight: 400;
+
+  background-color: #170353;
+  color: #f8f8f8;
+  transition: 0.3s;
+}
+
+.toogleBtn:hover {
+  background-color: #512dbc;
+}
+
+.pokemonTypes {
+  width: 35%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  box-shadow: 1px 1px #170353, 2px 2px #170353, 3px 3px #170353;
+}
+
+.pokemonTypes ul {
+  list-style: none;
 }
 </style>
